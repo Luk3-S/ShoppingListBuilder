@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("SLB_App/", include("SLB_App.urls")),
     path('', views.slb_index, name='homepage'),
+    path("addRecipe/", views.slb_add_recipe, name='slb_add_recipe'),
+    path("get_recipe_url/", views.get_recipe_url, name='add recipe'),
 ]
