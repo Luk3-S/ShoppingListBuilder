@@ -26,9 +26,11 @@ def get_recipe(request):
         form = RecipeForm(request.POST)
         if form.is_valid():
             fo = form.save(commit=False)
-            title, ingredients, steps = scrapeUrl(fo.url)
+            title, ingredients, image = scrapeUrl(fo.url)
+            if image == "":
+                image = "/static/apple.jpg"
             fo.ingredients = ingredients
-            fo.steps = steps
+            fo.image = image
             fo.title = title
             fo.save()
 

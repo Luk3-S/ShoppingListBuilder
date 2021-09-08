@@ -5,8 +5,8 @@ from django.forms import ModelForm
 
 
 class Recipe(models.Model):
+    image = models.FilePathField(path="/")
     title = models.CharField(max_length=100)
-    steps = models.TextField()
     ingredients = models.JSONField()
     url = models.URLField(default="")
 
