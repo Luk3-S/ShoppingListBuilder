@@ -21,65 +21,19 @@ def slb_add_recipe(request):
     return render(request, 'slbAddRecipe.html', {})
 
 
-# def get_recipe_url(request):
-#     if request.method == 'POST':
-#         form = RecipeUrlForm(request.POST)
-#         # if form.is_valid():
-#         if (True):
-#             #url = form.cleaned_data['recipe_url']
-#             recipe = form.save(commit=False)
-#             recipe.url = request.url
-#             recipe.save()
-#             # scrapeUrl(url)
-#             return HttpResponseRedirect('/')
-#     else:
-#         form = RecipeUrlForm()
-#     return render(request, 'slbAddRecipe.html', {'form': form})
-
-# def get_recipe_url(request):
-#     import datetime
-#     f = open("saveLog.txt", "a")
-#     f.write("in method: " + str(datetime.datetime.now()))
-#     if request.method == 'POST':
-#         f.write("before form")
-#         form = RecipeUrlForm(request.POST)
-#         f.write("got form")
-#         if form.is_valid():
-#             f.write("form valid")
-#             recipe = Recipe()
-#             recipe.url = form.cleaned_data['recipe_url']
-#             recipe.title = "test title"
-#             recipe.ingredients = "test ing"
-#             recipe.steps = "test ste"
-#             recipe.save()
-#             f.write("form saved?")
-#         f.write("form not valid")
-#         f.close()
-#     return HttpResponseRedirect('/')
-
-def get_recipe_url(request):
-    f = open("saveLog.txt", "a")
+def get_recipe(request):
     if request.method == 'POST':
-        f.write("1")
         form = RecipeForm(request.POST)
-        f.write("2")
-
         if form.is_valid():
-            f.write("3")
-
             fo = form.save(commit=False)
-            fo.ingredients = "test1"
-            fo.steps = "test2"
-            fo.title = "test3"
+            title, ingredients, steps = scrapeUrl(fo.url)
+            fo.ingredients = ingredients
+            fo.steps = steps
+            fo.title = title
             fo.save()
-            #recipes = Recipe.objects.all()
-            f.write("4")
-            f.close()
-            # return render(request, 'slbAddRecipe.html', {'recipes': recipes})
+
             return HttpResponseRedirect('.')
     else:
-        f.write("5")
-        f.close()
+
         form = RecipeForm()
     return render(request, 'slbAddRecipe.html', {'form': form})
-    # return HttpResponseRedirect('/')
