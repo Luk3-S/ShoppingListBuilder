@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-
+from django.forms import ModelForm
 # Create your models here.
 
 
@@ -8,4 +8,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
     steps = models.TextField()
     ingredients = models.JSONField()
-    url = forms.URLField()
+    url = models.URLField(default="")
+
+    def __str__(self):
+        return self.title

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from SLB_App.models import Recipe
 from django.http import HttpResponseRedirect
-from .forms import RecipeUrlForm
+from .forms import RecipeUrlForm, RecipeForm
 from .urlScraper import scrapeUrl
 
 
@@ -36,23 +36,50 @@ def slb_add_recipe(request):
 #         form = RecipeUrlForm()
 #     return render(request, 'slbAddRecipe.html', {'form': form})
 
+# def get_recipe_url(request):
+#     import datetime
+#     f = open("saveLog.txt", "a")
+#     f.write("in method: " + str(datetime.datetime.now()))
+#     if request.method == 'POST':
+#         f.write("before form")
+#         form = RecipeUrlForm(request.POST)
+#         f.write("got form")
+#         if form.is_valid():
+#             f.write("form valid")
+#             recipe = Recipe()
+#             recipe.url = form.cleaned_data['recipe_url']
+#             recipe.title = "test title"
+#             recipe.ingredients = "test ing"
+#             recipe.steps = "test ste"
+#             recipe.save()
+#             f.write("form saved?")
+#         f.write("form not valid")
+#         f.close()
+#     return HttpResponseRedirect('/')
+
 def get_recipe_url(request):
-    import datetime
     f = open("saveLog.txt", "a")
-    f.write("in method: " + str(datetime.datetime.now()))
     if request.method == 'POST':
-        f.write("before form")
-        form = RecipeUrlForm(request.POST)
-        f.write("got form")
+        f.write("1")
+        form = RecipeForm(request.POST)
+        f.write("2")
+
         if form.is_valid():
-            f.write("form valid")
-            recipe = Recipe()
-            recipe.url = form.cleaned_data['recipe_url']
-            recipe.title = "test title"
-            recipe.ingredients = "test ing"
-            recipe.steps = "test ste"
-            recipe.save()
-            f.write("form saved?")
-        f.write("form not valid")
+            f.write("3")
+
+            fo = form.save(commit=False)
+            fo.ingredients = "test1"
+            fo.steps = "test2"
+            fo.title = "test3"
+            fo.save()
+            #recipes = Recipe.objects.all()
+            f.write("4")
+            f.close()
+            # return render(request, 'slbAddRecipe.html', {'recipes': recipes})
+            return HttpResponseRedirect('.')
+    else:
+        f.write("5")
         f.close()
-    return HttpResponseRedirect('/')
+        form = RecipeForm()
+    return render(request, 'slbAddRecipe.html', {'form': form})
+    # return HttpResponseRedirect('/')

@@ -7,10 +7,10 @@
     <div class="card-body">
         <form action="/get_recipe_url/" method="post">
             {% csrf_token %}
-
-            <label for="recipe_url">Paste URL: </label>
-            <input id="recipe_url" type="text" name="your_name" value="">
-            <input type="submit" value="OK">
+            <table>
+                {{form.as_table}}
+            </table>
+            <input type="submit" value="Submit">
         </form>
     </div>
 </div>
