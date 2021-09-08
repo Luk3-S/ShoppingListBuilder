@@ -5,14 +5,20 @@
 <h1>{{ recipe.title }}</h1>
 <div class="row">
     <div class="col-md-8">
-        <img src="{% static recipe.image %}" alt="" width="100%">
+        <img class="card-img-top" src="{{recipe.image }}" alt="">
     </div>
     <div class="col-md-4">
-        <h5>About the recipe:</h5>
-        <p>{{ recipe.steps }}</p>
+        <h5>Ingredients:</h5>
+        <div class"card-text">
+            {% for ing in recipe.ingredients %}
+            <li>{{ing}}</li>
+            {% endfor %}
+        </div>
         <br>
-        <h5>Technology used:</h5>
-        <p>{{ recipe.ingredients }}</p>
+        <h5>Instructions:</h5>
+        <div class="card-text">
+            <a href="{{recipe.url}}">Read more</a>
+        </div>
     </div>
 </div>
 {% endblock %}

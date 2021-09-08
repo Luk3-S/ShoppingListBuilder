@@ -7,6 +7,7 @@ from .urlScraper import scrapeUrl
 
 def slb_index(request):
     recipes = Recipe.objects.all()
+
     context = {'recipes': recipes}
     return render(request, 'slbIndex.html', context)
 

@@ -10,10 +10,19 @@
             <div class="card-body">
 
                 <h5 class="card-title">{{ recipe.title }}</h5>
-                <p class="card-text">{{ recipe.ingredients }}</p>
+                <!-- <p class="card-text">{{ recipe.ingredients }}</p> -->
+                <div class"card-text">
+                    {% for ing in recipe.ingredients %}
+                    {% if forloop.counter < 7 %} <li>{{ing}}</li>
+
+                        {% endif %}
+                        {% endfor %}
+
+
+                </div>
 
                 <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary">
-                    Read More
+                    More details
                 </a>
             </div>
         </div>

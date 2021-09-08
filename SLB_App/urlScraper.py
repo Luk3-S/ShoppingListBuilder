@@ -54,4 +54,4 @@ def removeHtml(html):
     return string_out
 
 
-print(scrapeUrl("https://www.bbcgoodfood.com/recipes/oaty-katsu-chicken-dippers"))
+# print(scrapeUrl("https://www.bbcgoodfood.com/recipes/oaty-katsu-chicken-dippers"))
