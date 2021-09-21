@@ -6,7 +6,8 @@
 <div class="row">
     {% for recipe in recipes %}
     <div class="col-md-4">
-        <div class="card mb-2">
+        <div class="card h-100">
+            <!-- card mb-2 -->
             <img class="card-img-top" src="{{recipe.image }}" alt="">
             <div class="card-body">
 
@@ -19,17 +20,15 @@
 
                             {% endif %}
                             {% endfor %}
-                            </p>
-                            <input type="checkbox" onclick="getIngredients()" id="ch" />
                     </div>
-
-                    <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary">
-                        More details
-                    </a>
-                    <a href="{% url 'add_to_basket' recipe.pk %}">Add to basket</a>
+                    <div class="text-bottom">
+                        <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary"> More details</a>
+                        <a href="{% url 'add_to_basket' recipe.pk %}" class="btn btn-primary">Add to basket</a>
+                    </div>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-    {% endblock %}
+    {% endfor %}
+</div>
+{% endblock %}
