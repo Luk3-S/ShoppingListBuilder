@@ -12,3 +12,9 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Basket(models.Model):
+
+    contents = models.JSONField(default=list)
+    recipes = models.JSONField(default=list)

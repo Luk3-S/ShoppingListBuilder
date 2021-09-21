@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block page_content %}
+
 <h1>Recipes</h1>
 <div class="row">
     {% for recipe in recipes %}
@@ -11,22 +12,24 @@
 
                 <h5 class="card-title">{{ recipe.title }}</h5>
                 <!-- <p class="card-text">{{ recipe.ingredients }}</p> -->
-                <div class"card-text">
-                    {% for ing in recipe.ingredients %}
-                    {% if forloop.counter < 7 %} <li>{{ing}}</li>
+                <div class="card-text" id="card-text">
+                    <div id="card-inner">
+                        {% for ing in recipe.ingredients %}
+                        {% if forloop.counter < 7 %} <li>{{ing}}</li>
 
-                        {% endif %}
-                        {% endfor %}
+                            {% endif %}
+                            {% endfor %}
+                            </p>
+                            <input type="checkbox" onclick="getIngredients()" id="ch" />
+                    </div>
 
-
+                    <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary">
+                        More details
+                    </a>
+                    <a href="{% url 'add_to_basket' recipe.pk %}">Add to basket</a>
                 </div>
-
-                <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary">
-                    More details
-                </a>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endblock %}
+    {% endblock %}

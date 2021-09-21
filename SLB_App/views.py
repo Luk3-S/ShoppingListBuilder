@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from SLB_App.models import Recipe
+from django.shortcuts import get_object_or_404, render
+from SLB_App.models import Recipe, Basket
 from django.http import HttpResponseRedirect
 from .forms import RecipeUrlForm, RecipeForm
 from .urlScraper import scrapeUrl
+from django.contrib import messages
 
 
 def slb_index(request):
@@ -40,3 +41,18 @@ def get_recipe(request):
 
         form = RecipeForm()
     return render(request, 'slbAddRecipe.html', {'form': form})
+
+
+def add_to_basket(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    basket, created = Basket.objects.get_or_create(request)
+
+    currentRecipes = basket.recipes
+    if recipe.title not in currentRecipes:
+        basket.contents += recipe.ingredients
+        basket.recipes.append(recipe.title)
+        basket.save()
+        messages.success(request, "Basket Updated!")
+    else:
+        messages.MessageFailure(request, "Basket not updated, duplicate item")
+    return slb_index(request)
