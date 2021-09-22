@@ -3,32 +3,87 @@
 {% block page_content %}
 
 <h1>Recipes</h1>
-<div class="row">
-    {% for recipe in recipes %}
-    <div class="col-md-4">
-        <div class="card h-100">
-            <!-- card mb-2 -->
-            <img class="card-img-top" src="{{recipe.image }}" alt="">
-            <div class="card-body">
+<!-- <div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="row">
+            {% for recipe in recipes %}
+            <!-<div class="col-md-4"> -
+<div class="card mb-4 d-flex">
+    <!-- card mb-2 -
+    <div class="card-header ">
+        <h5 class="card-title">{{ recipe.title }}</h5>
+    </div>
+    <!--<img class="card-img-top" src="{{recipe.image }}" alt="">-
+                <div class="card-body d-flex flex-column">
 
-                <h5 class="card-title">{{ recipe.title }}</h5>
-                <!-- <p class="card-text">{{ recipe.ingredients }}</p> -->
-                <div class="card-text" id="card-text">
-                    <div id="card-inner">
-                        {% for ing in recipe.ingredients %}
-                        {% if forloop.counter < 7 %} <li>{{ing}}</li>
+                    <h6 class="card-title">Ingredients</h6>
+
+                    {% for ing in recipe.ingredients %}
+                    <ul class="list-unstyled mt-3 mb-4">
+                        {% if forloop.counter < 6 %} <li>{{ing}}</li>
 
                             {% endif %}
                             {% endfor %}
-                    </div>
-                    <div class="text-bottom">
-                        <a href="{% url 'slb_detail' recipe.pk %}" class="btn btn-primary"> More details</a>
-                        <a href="{% url 'add_to_basket' recipe.pk %}" class="btn btn-primary">Add to basket</a>
-                    </div>
+
+                    </ul>
+
+                    <a href="{% url 'slb_detail' recipe.pk %}" class="align-self-end btn btn-lg btn-block btn-primary"
+                        style="margin-top: auto;">
+                        More
+                        details</a>
+                    <a href="{% url 'add_to_basket' recipe.pk %}"
+                        class="align-self-end btn btn-lg btn-block btn-primary" style="margin-top: auto;">Add to
+                        basket</a>
+
+                </div>
+            </div>
+            <!-- </div> -
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div> 
+
+ -->
+
+<div class="container">
+    <div class="row">
+
+        <!--- <div class="card-deck mb-3 "> -->
+
+        {% for recipe in recipes %}
+        <div class="col-sm-3">
+            <div class="card mb-4 box-shadow h-100">
+                <div class="card-header">
+                    <h6 class="my-0 font-weight-bold">{{recipe.title}}</h6>
+                </div>
+                <img class="card-img-top" src="{{recipe.image }}" alt="">
+                <div class="card-body d-flex flex-column text-center">
+                    <h6 class="card-title pricing-card-title">Ingredients</h6>
+
+                    <ul class="list-unstyled mt-3 mb-4">
+                        {% for ing in recipe.ingredients %}
+                        {% if forloop.counter < 6 %} <li>{{ing}}</li>
+
+                            {% endif %}
+                            {% endfor %}
+
+                    </ul>
+
+                    <a href="{% url 'slb_detail' recipe.pk %}" "
+                    style=" margin-top: auto;">
+                        More
+                        details</a>
+                    <br>
+                    <a href="{% url 'add_to_basket' recipe.pk %}" "
+                    >Add to
+                    basket</a>
                 </div>
             </div>
         </div>
+        {% endfor %}
+    
     </div>
-    {% endfor %}
+
 </div>
 {% endblock %}

@@ -48,6 +48,10 @@ def removeHtml(html):
         i = (i[sInd+1:eInd])
         i = i.replace("<!-- -->", "")
         i = i.replace("½", "0.5")
+        print(i)
+        i = i.strip()
+        i = i.split(",", 1)[0]
+        print(i)
         if len(html) == 1:
             return i
         string_out.append(i)
