@@ -75,14 +75,18 @@
                         More
                         details</a>
                     <br>
+                    {% if recipe.inCart == False %}
                     <a href="{% url 'add_to_basket' recipe.pk %}" "
                     >Add to
                     basket</a>
+                    {% else %}
+                    <a href=" {% url 'remove_from_basket' recipe.pk %}">Remove from basket </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
-    
+
     </div>
 
 </div>

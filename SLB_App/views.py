@@ -46,13 +46,37 @@ def get_recipe(request):
 def add_to_basket(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     basket, created = Basket.objects.get_or_create(request)
+   # basketIngs = Basket.objects.get(request).conents
 
     currentRecipes = basket.recipes
     if recipe.title not in currentRecipes:
-        basket.contents += recipe.ingredients
-        basket.recipes.append(recipe.title)
+        basket.contents[pk] = recipe.ingredients
+        basket.recipes[pk] =recipe.title
         basket.save()
+        recipe.inCart = True
+        recipe.save()
         messages.success(request, "Basket Updated!")
     else:
         messages.MessageFailure(request, "Basket not updated, duplicate item")
     return slb_index(request)
+
+def remove_from_basket(request,pk):
+    print("RMB")
+    recipe = get_object_or_404(Recipe, pk=pk)
+    basket,created  = Basket.objects.get_or_create(request)
+    print(basket.recipes)
+    if str(pk) in basket.recipes:
+    #if recipe in currentRecipes:
+        print("IN")
+        recipe.inCart = False
+        recipe.save()
+
+        basket.contents.pop(str(pk))
+        basket.recipes.pop(str(pk))
+        basket.save()
+        messages.success(request,"Basket Updated!")
+    else:
+        messages.MessageFailure(request,"Item not in basket. Can't remove.")
+    return slb_index(request)
+
+

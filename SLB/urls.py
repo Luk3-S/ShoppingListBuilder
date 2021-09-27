@@ -23,4 +23,6 @@ urlpatterns = [
     path("addRecipe/", views.slb_add_recipe, name='slb_add_recipe'),
     path("get_recipe/", views.get_recipe, name='get_recipe'),
     path("add_to_basket/", views.add_to_basket, name='add_to_basket'),
+    path("remove_from_basket/", views.remove_from_basket, name='remove_from_basket'),
+
 ]
