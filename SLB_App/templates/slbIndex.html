@@ -52,7 +52,7 @@
         <!--- <div class="card-deck mb-3 "> -->
 
         {% for recipe in recipes %}
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <div class="card mb-4 box-shadow h-100">
                 <div class="card-header">
                     <h6 class="my-0 font-weight-bold">{{recipe.title}}</h6>
@@ -80,7 +80,7 @@
                     >Add to
                     basket</a>
                     {% else %}
-                    <a href=" {% url 'remove_from_basket' recipe.pk %}">Remove from basket </a>
+                    <a href=" {% url 'remove_from_basket' recipe.pk %}" ">Remove from basket </a>
                     {% endif %}
                 </div>
             </div>

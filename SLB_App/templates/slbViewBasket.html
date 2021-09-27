@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Basket Contents</h1>
+{% for key,value in Ingredients.items %}
+<li> {{key}} : {{value}}</li>
+{% endfor %}
+{% for title in RecipeTitles %}
+<h6> {{title}}</h6>
+{% endfor %}
+{% endblock %}
